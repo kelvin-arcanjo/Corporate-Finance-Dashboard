@@ -20,16 +20,16 @@
     <main>
         <section>
             <h2>Resumo</h2>
-            <article></article>
-            <article></article>
-            <article></article>
-            <article></article>
+            <article class="kpi-card" data-kpi="income"></article>
+            <article class="kpi-card" data-kpi="expense"></article>
+            <article class="kpi-card" data-kpi="balance"></article>
+            <article class="kpi-card" data-kpi="total-transactions"></article>
             </section>
 
         <section>
             <h2>Gráficos</h2>
-            <div></div>
-            <div></div>
+            <div id="financialChartContainer"></div>
+            <div id="expenseChartContainer"></div>
         </section>
 
         <section>
@@ -44,6 +44,9 @@
                         <th scope="col">Valor</th>
                     </tr>
                 </thead>
+                <tbody id="transactionList">
+                    <!-- linhas de transações vão entrar aqui via JS -->
+                </tbody>
             </table>
         </section>
 
