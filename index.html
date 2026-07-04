@@ -25,7 +25,7 @@
             <button>+ Nova Transação</button>
         </header>
         <main>
-            <section>
+            <section id="summarySection" class="dashboard-section">
                 <h2>Resumo</h2>
                 <article class="kpi-card" data-kpi="income"></article>
                 <article class="kpi-card" data-kpi="expense"></article>
@@ -33,13 +33,13 @@
                 <article class="kpi-card" data-kpi="total-transactions"></article>
                 </section>
     
-            <section>
+            <section id="chartsSection" class="dashboard-section">
                 <h2>Gráficos</h2>
                 <div id="financialChartContainer"></div>
                 <div id="expenseChartContainer"></div>
             </section>
     
-            <section>
+            <section id="transactionsSection" class="dashboard-section">
                 <h2>Transações</h2>
                 <table>
                     <thead>
@@ -59,6 +59,49 @@
     
         </main>
     </div>
+
+    <dialog id="transactionModal">
+        <form method="dialog">
+            <h2>Nova Transação</h2>
+
+            <div class="form-group">
+                <label for="modalType">Tipo</label>
+                <select id="modalType" required>
+                    <option value="income">Receita</option>
+                    <option value="expense">Despesa</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="modalDescription">Descrição</label>
+                <input type="text" id="modalDescription" placeholder="Ex: Salário , Supermercado..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="modalAmount">Valor</label>
+                <input type="number" id="modalAmount" step="0.01" placeholder="0.00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="modalDate">Data</label>
+                <input type="date" id="modalDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="modalCategory">Categoria</label>
+                <select id="modalCategory" required>
+                    <option value="vendas">Vendas</option>
+                    <option value="servicos">Serviços</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">Guardar</button>
+            </div>
+        </form>
+    </dialog>
 
 </body>
 </html>

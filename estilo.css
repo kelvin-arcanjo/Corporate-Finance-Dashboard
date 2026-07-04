@@ -30,3 +30,35 @@ aside nav ul {
 main{
     flex-grow: 1;
 }
+
+#summarySection{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 16px;
+}
+
+#summarySection h2 {
+    grid-column: 1 / -1;
+}
+
+#chartsSection{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap:20px;
+}
+
+#chartsSection h2 {
+    grid-column: 1 / -1;
+}
+
+table{
+    width: 100%;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+
+
+
+
+
