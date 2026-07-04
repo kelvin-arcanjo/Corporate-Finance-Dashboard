@@ -54,6 +54,8 @@ form.addEventListener('submit' , (event)=>{
 
     adicionarTransacao(tipoInput , descricaoInput , valorInput , dataInput , categoriaInput)
 
+    renderizarTabela()
+
     //Fechar o modal;
 
     document.getElementById('transactionModal').close()
@@ -63,3 +65,54 @@ form.addEventListener('submit' , (event)=>{
     form.reset()
 
 })
+
+renderizarTabela()
+
+//Renderizar a Tabela + Calcular KPIs;
+
+function renderizarTabela(){
+    const tbody = document.getElementById('transactionList')
+
+    // Limpar tabela antes de redesenhar;
+
+    tbody.innerHTML = ''
+
+    transacoes.forEach(t =>{
+        const tr = document.createElement('tr')
+        
+        //Element description;
+
+        const tdDescricao = document.createElement('td')
+        tdDescricao.textContent = t.description
+        tr.appendChild(tdDescricao)
+
+        //Element category;
+
+        const tdCategoria = document.createElement('td')
+        tdCategoria.textContent = t.category
+        tr.appendChild(tdCategoria)
+
+        //Element date;
+
+        const tdData = document.createElement('td')
+        tdData.textContent = t.date
+        tr.appendChild(tdData)
+
+        //Element type;
+
+        const tdTipo = document.createElement('td')
+        tdTipo.textContent = t.type === 'income' ? 'Receita' : 'Despesa'
+        tr.appendChild(tdTipo)
+
+        //Element amount;
+
+        const tdValor = document.createElement('td')
+        tdValor.textContent = `${t.amount.toFixed(2)}€`
+        tr.appendChild(tdValor)
+
+        //Implementar no tbody da table;
+
+        tbody.appendChild(tr)
+
+    })
+}
