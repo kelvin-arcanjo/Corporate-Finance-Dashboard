@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+}
+
+aside{
+    width: 260px;
+    flex-shrink: 0;
+}
+
+aside nav ul {
+    list-style: none;
+}
+
+.main-wrapper{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    flex-grow: 1;
+}
