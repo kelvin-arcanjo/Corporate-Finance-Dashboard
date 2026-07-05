@@ -1,3 +1,6 @@
+let graficoSaldo;
+let graficoCategoria;
+
 //Carrega as transações guardadas no localStorage ou inicia um array vazio se for o primeiro acesso;
 
 let transacoes = JSON.parse(localStorage.getItem('transacoes')) || []
@@ -57,6 +60,7 @@ form.addEventListener('submit' , (event)=>{
     renderizarTabela()
     actualizarKPIs()
     criarGraficoSaldo()
+    criarGraficoCategoria()
 
     //Fechar o modal;
 
@@ -71,6 +75,7 @@ form.addEventListener('submit' , (event)=>{
 renderizarTabela()
 actualizarKPIs()
 criarGraficoSaldo()
+criarGraficoCategoria()
 
 //Renderizar a Tabela + Calcular KPIs;
 
@@ -279,6 +284,7 @@ campoPesquisa.addEventListener('input', (event) => {
 
 //Criação dos gráficos;
 
+
 function criarGraficoSaldo(){
     const historico = calcularSaldoAcumulado()
 
@@ -287,7 +293,13 @@ function criarGraficoSaldo(){
 
     const canvas = document.getElementById('balanceChart')
 
-    new Chart(canvas , {
+    //Se já existe um gráfico anterior neste canva, destrói-o primeiro;
+
+    if(graficoSaldo){
+        graficoSaldo.destroy()
+    }
+
+    graficoSaldo = new Chart(canvas , {
         type: 'line',
         data: {
             labels: labels,
@@ -298,3 +310,52 @@ function criarGraficoSaldo(){
         }
     })
 }
+
+
+//Calcula despesas por categoria;
+
+function calcularDespesasPorCategoria(){
+    const despesas = transacoes.filter(t => t.type === 'expense')
+
+    const totaisPorCategoria = despesas.reduce((acumulador , t)=>{
+        if(acumulador[t.category]){
+            acumulador[t.category] += t.amount
+
+        } else {
+            acumulador[t.category] = t.amount
+        }
+        return acumulador
+    }, {})
+
+    return totaisPorCategoria
+}
+
+//Criação de Gráficos por categoria;
+
+function criarGraficoCategoria(){
+    const totaisPorCategoria = calcularDespesasPorCategoria()
+
+    const labels = Object.keys(totaisPorCategoria)
+    const valores = Object.values(totaisPorCategoria)
+
+    const canvas = document.getElementById('categoryChart')
+
+    //Se já existe um gráfico anterior neste canva, destrói-o primeiro;
+
+    if(graficoCategoria){
+        graficoCategoria.destroy()
+    }
+
+    graficoCategoria = new Chart(canvas , {
+        type: 'doughnut',
+        data:{
+            labels: labels,
+            datasets: [{
+                label: 'Despesas por Categoria',
+                data: valores
+            }]
+        }
+    })
+}
+
+
