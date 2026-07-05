@@ -56,6 +56,7 @@ form.addEventListener('submit' , (event)=>{
 
     renderizarTabela()
     actualizarKPIs()
+    criarGraficoSaldo()
 
     //Fechar o modal;
 
@@ -69,6 +70,7 @@ form.addEventListener('submit' , (event)=>{
 
 renderizarTabela()
 actualizarKPIs()
+criarGraficoSaldo()
 
 //Renderizar a Tabela + Calcular KPIs;
 
@@ -275,3 +277,24 @@ campoPesquisa.addEventListener('input', (event) => {
 
 //Integração com Chart.js;
 
+//Criação dos gráficos;
+
+function criarGraficoSaldo(){
+    const historico = calcularSaldoAcumulado()
+
+    const labels = historico.map(ponto => ponto.date)
+    const valores = historico.map(ponto => ponto.saldo)
+
+    const canvas = document.getElementById('balanceChart')
+
+    new Chart(canvas , {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Saldo (€)',
+                data: valores
+            }]
+        }
+    })
+}
