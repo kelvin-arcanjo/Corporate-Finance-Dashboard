@@ -72,6 +72,11 @@ form.addEventListener('submit' , (event)=>{
 
     form.reset()
 
+    //Verificação da Transação;
+
+
+    alert('Transação concluída com sucesso! ✅')
+
 })
 
 renderizarTabela()
@@ -396,8 +401,7 @@ sidebarToggle.addEventListener('click' , ()=>{
 
 document.getElementById('closeSidebar').addEventListener('click', () => {
     sidebar.classList.remove('is-open');
-});
-
+})
 
 
 //Twemoji;
